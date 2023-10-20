@@ -6,12 +6,21 @@ import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
 window.onload = () => {
-  document.querySelector(".card").innerHTML = generateRandomNumber();
-  document.querySelector(".card").classList.add(generateRandomSuit());
-  var x = document.getElementById("button");
-  x.addEventListener("click", generateRandomNumber);
-  x.addEventListener("click", generateRandomSuit);
+  const cardElem = document.querySelector(".card");
+  cardElem.innerHTML = generateRandomNumber();
+  cardElem.classList.add(generateRandomSuit());
+  const btnElem = document.getElementById("button");
+  btnElem.addEventListener("click", () => {
+    cardElem.innerHTML = generateRandomNumber();
+    cardElem.classList.add(generateRandomSuit());
+  });
 };
+
+let TimerId = setInterval(() => {
+  const cardElem = document.querySelector(".card");
+  cardElem.innerHTML = generateRandomNumber();
+  cardElem.classList.add(generateRandomSuit());
+}, 500);
 
 function generateRandomNumber() {
   let numbers = [
@@ -37,3 +46,18 @@ function generateRandomSuit() {
   let randomSuit = Math.floor(Math.random() * suit.length);
   return suit[randomSuit];
 }
+
+document.querySelector("#button2").addEventListener("click", evt => {
+  if (TimerId) {
+    clearTimeout(TimerId);
+    TimerId = null;
+    evt.target.innerText = "Start";
+  } else {
+    TimerId = setInterval(() => {
+      const cardElem = document.querySelector(".card");
+      cardElem.innerHTML = generateRandomNumber();
+      cardElem.classList.add(generateRandomSuit());
+    }, 500);
+    evt.target.innerText = "Stop";
+  }
+});
