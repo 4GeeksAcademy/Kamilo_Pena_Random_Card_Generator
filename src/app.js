@@ -15,13 +15,13 @@ window.onload = () => {
     cardElem.classList.add(generateRandomSuit());
   });
 };
-
+//Star Timer
 let TimerId = setInterval(() => {
   const cardElem = document.querySelector(".card");
   cardElem.innerHTML = generateRandomNumber();
   cardElem.classList.add(generateRandomSuit());
 }, 500);
-
+//Funtion for
 function generateRandomNumber() {
   let numbers = [
     "A",
